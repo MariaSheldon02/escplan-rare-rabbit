@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="A competitive market analysis of Escape Plan's Rare Rabbit luggage in the Indian premium travel accessories market."/>
+<meta name="theme-color" content="#E8732A"/>
+<link rel="canonical" href="https://your-username.github.io/rare-rabbit-escape-plan-dashboard/"/>
+<title>Escape Plan — Rare Rabbit Market Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: #232323;
+    --orange: #E8732A;
+    --orange-dim: rgba(232,115,42,0.12);
+    --orange-glow: rgba(232,115,42,0.3);
+    --white: #F5F0EB;
+    --muted: #888;
+    --text: #DEDAD4;
+    --gold: #C9A84C;
+    --gold-dim: rgba(201,168,76,0.12);
+    --red: #E05252;
+    --green: #52C78A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  .bg-images {
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none;
+    background-image: url('dashboard-bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.10;
+    mix-blend-mode: screen;
+  }
+
+  /* ─── TOP NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px;
+    height: 60px;
+    background: rgba(10,10,10,0.92);
+    background-image: url('rare-rabbit-store.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-blend-mode: overlay;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .logo-esc {
+    display: flex; flex-direction: column; align-items: flex-start;
+    line-height: 1;
+  }
+  .logo-esc .esc { font-size: 18px; color: var(--white); }
+  .logo-esc .plan { font-size: 18px; color: var(--orange); }
+  .logo-bracket {
+    width: 20px; height: 20px;
+    border: 3px solid var(--orange);
+    border-left: none; border-bottom: none;
+    position: relative; top: -4px;
+  }
+
+  .nav-tabs {
+    display: flex; gap: 4px;
+  }
+
+  .nav-tab {
+    padding: 6px 14px;
+    border: none; background: none;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { color: var(--white); background: var(--surface2); }
+  .nav-tab.active { color: var(--orange); background: var(--orange-dim); }
+
+  .nav-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── PAGES ─── */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding: 80px 0 60px;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .page.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative; z-index: 1;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  p { line-height: 1.7; color: var(--text); }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(232,115,42,0.1);
+  }
+
+  /* ─── STAT PILLS ─── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--orange);
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(232,115,42,0.1); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--orange);
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ─── GRIDS ─── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+  /* ─── HERO SECTION ─── */
+  @keyframes heroScale {
+    from { background-size: 110%; }
+    to   { background-size: 100%; }
+  }
+
+  .hero {
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+    min-height: 92vh;
+    background-image: url('rare-rabbit-store.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    animation: heroScale 8s ease forwards;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,10,10,0.55) 0%,
+      rgba(10,10,10,0.85) 60%,
+      rgba(10,10,10,1) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      rgba(10,10,10,0.6) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 260px;
+    color: rgba(232,115,42,0.03);
+    top: -30px; right: -20px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 20px 0 40px;
+    line-height: 1.6;
+  }
+  .hero-divider {
+    width: 60px; height: 3px;
+    background: var(--orange);
+    margin: 28px 0;
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--surface2); }
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.2s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody td { padding: 13px 18px; font-size: 14px; }
+  td.highlight { color: var(--orange); font-weight: 600; }
+  td.good { color: var(--green); }
+  td.warn { color: #E8A832; }
+  td.bad { color: var(--red); }
+
+  /* ─── BADGES ─── */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
+  .badge-green { background: rgba(82,199,138,0.1); color: var(--green); border: 1px solid var(--green); }
+  .badge-red { background: rgba(224,82,82,0.1); color: var(--red); border: 1px solid var(--red); }
+  .badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold); }
+
+  /* ─── STRENGTH / WEAKNESS ITEMS ─── */
+  .sw-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sw-item:last-child { border-bottom: none; }
+  .sw-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .sw-icon.str { background: rgba(82,199,138,0.12); }
+  .sw-icon.wk { background: rgba(224,82,82,0.12); }
+  .sw-title { font-weight: 600; color: var(--white); font-size: 14px; margin-bottom: 4px; }
+  .sw-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ─── ROADMAP ─── */
+  .roadmap-phase {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 0; position: relative;
+    padding: 0 0 0 24px;
+    margin-bottom: 0;
+  }
+  .roadmap-track {
+    display: flex; flex-direction: column; gap: 0;
+    position: relative;
+  }
+  .phase-block {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .phase-block:last-child { border-bottom: none; }
+  .phase-block::before {
+    content: '';
+    position: absolute; left: -25px; top: 36px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 12px var(--orange-glow);
+  }
+  .phase-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(232,115,42,0.15);
+    line-height: 1;
+  }
+  .phase-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .phase-timeline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .phase-actions { list-style: none; }
+  .phase-actions li {
+    font-size: 13px; color: var(--text);
+    padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .phase-actions li::before {
+    content: '→'; color: var(--orange); flex-shrink: 0;
+  }
+  .phase-metric {
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(82,199,138,0.08);
+    border: 1px solid rgba(82,199,138,0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: inline-block;
+  }
+
+  /* ─── RECOMMENDATION CARDS ─── */
+  .rec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--orange);
+    transition: all 0.25s;
+  }
+  .rec-card:hover {
+    background: var(--surface2);
+    transform: translateX(4px);
+  }
+  .rec-priority {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pri-critical { color: var(--red); }
+  .pri-high { color: var(--orange); }
+  .pri-medium { color: var(--gold); }
+  .rec-title { font-weight: 600; color: var(--white); margin-bottom: 6px; font-size: 15px; }
+  .rec-rationale { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ─── CHART CONTAINERS ─── */
+  .chart-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .chart-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* ─── SECTION SPACING ─── */
+  .section { margin: 60px 0; }
+  .section-sm { margin: 36px 0; }
+
+  /* ─── DIVIDER ─── */
+  hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, var(--orange), transparent);
+    margin: 48px 0;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 32px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative; z-index: 1;
+  }
+  footer .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+  footer .footer-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ─── QUOTE BLOCK ─── */
+  .quote-block {
+    border-left: 3px solid var(--orange);
+    padding: 16px 20px;
+    background: var(--surface2);
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+    font-style: italic;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .quote-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 700px) {
+    nav { padding: 0 16px; }
+    .nav-tabs { display: none; }
+    .container { padding: 0 16px; }
+    .hero-bg-text { font-size: 120px; opacity: 0.5; }
+    .phase-block { grid-template-columns: 1fr; }
+    table { font-size: 12px; }
+    td, th { padding: 10px 12px; }
+  }
+
+  /* Mobile nav dropdown */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    flex-direction: column;
+    padding: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu .nav-tab { width: 100%; text-align: left; padding: 12px 16px; font-size: 13px; }
+
+  .hamburger {
+    display: none;
+    background: none; border: none;
+    color: var(--white); font-size: 22px; cursor: pointer;
+  }
+  @media (max-width: 700px) { .hamburger { display: block; } }
+
+  /* ─── PAGE 1: OVERVIEW ─── */
+  .overview-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 40px 0;
+  }
+  @media (max-width: 800px) { .overview-intro { grid-template-columns: 1fr; } }
+
+  .brand-badge-row {
+    display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0;
+  }
+
+  .esc-logo-large {
+    display: flex; flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+  }
+  .esc-logo-large .esc-l { font-size: 64px; line-height: 1; color: var(--white); }
+  .esc-logo-large .plan-l { font-size: 64px; line-height: 1; color: var(--orange); }
+  .esc-corner {
+    display: inline-block;
+    width: 28px; height: 28px;
+    border: 4px solid var(--orange);
+    border-left: none; border-bottom: none;
+    margin-left: 8px;
+    vertical-align: top;
+    margin-top: 6px;
+  }
+
+  /* animated underline hover */
+  .a-link {
+    color: var(--orange);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .a-link:hover { border-color: var(--orange); }
+
+  /* vertical timeline line */
+  .roadmap-wrap {
+    position: relative;
+    padding-left: 40px;
+  }
+  .roadmap-wrap::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 36px; bottom: 36px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--orange), rgba(232,115,42,0.1));
+  }
+
+  /* competitor radar labels */
+  .radar-legend {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;
+  }
+  .radar-legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
+  }
+  .radar-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .page-hero {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .page-hero-bg {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 180px;
+    color: rgba(232,115,42,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-images"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" onclick="switchPage('overview')">
+    <img src="logo.png" alt="Rare Rabbit" style="height:32px; margin-right:8px; object-fit:contain; mix-blend-mode:screen;" onerror="this.style.display='none'" />
+    <div class="esc-logo-large" style="flex-direction:row;align-items:center;gap:0">
+      <div style="display:flex;flex-direction:column;line-height:1;">
+        <span style="font-size:16px;color:var(--white);letter-spacing:2px;">ESC</span>
+        <span style="font-size:16px;color:var(--orange);letter-spacing:2px;">PLAN</span>
+      </div>
+      <div style="width:14px;height:14px;border:3px solid var(--orange);border-left:none;border-bottom:none;margin-left:4px;margin-top:2px;"></div>
+    </div>
+  </a>
+
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="switchPage('overview')">Overview</button>
+    <button class="nav-tab" onclick="switchPage('dashboard')">Dashboard</button>
+    <button class="nav-tab" onclick="switchPage('swot')">Strengths & Gaps</button>
+    <button class="nav-tab" onclick="switchPage('competitors')">Competitors</button>
+    <button class="nav-tab" onclick="switchPage('roadmap')">Roadmap</button>
+  </div>
+
+  <div class="nav-badge">May 2026</div>
+  <button class="hamburger" onclick="toggleMobile()">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="nav-tab" onclick="switchPage('overview');toggleMobile()">Overview</button>
+  <button class="nav-tab" onclick="switchPage('dashboard');toggleMobile()">Dashboard</button>
+  <button class="nav-tab" onclick="switchPage('swot');toggleMobile()">Strengths & Gaps</button>
+  <button class="nav-tab" onclick="switchPage('competitors');toggleMobile()">Competitors</button>
+  <button class="nav-tab" onclick="switchPage('roadmap');toggleMobile()">Roadmap</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 1: OVERVIEW -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="page active" id="page-overview">
+<div class="container">
+  <div class="hero">
+    <div class="disclaimer-box" style="position:absolute; top:20px; right:28px; max-width:280px; padding:12px; border:1px solid var(--border); background:var(--surface); border-radius:6px; font-size:10px; color:var(--muted); line-height:1.4; z-index:10; text-align:left;">
+      <strong style="color:var(--orange);">Disclaimer:</strong> All figures, pricing, competitor comparisons, customer insights, and strategic recommendations in this report are based on publicly available information and are intended solely for academic and demonstration purposes. This document does not represent official internal data, operations, or strategies of Rare Rabbit, Escape Plan, or any referenced brand.
+    </div>
+    <div class="hero-bg-text">ESCPLAN</div>
+    <div class="hero-tag">Market Research Portfolio · May 2026</div>
+    <h1>RARE<br>RABBIT<br><span style="color:var(--orange)">TROLLEY.</span></h1>
+    <p class="hero-sub">A competitive market analysis of Escape Plan's Rare Rabbit luggage in the Indian premium travel accessories market — examining positioning, pricing gaps, and buyer behaviour against Mokobara, VIP, American Tourister, and Safari.</p>
+
+    <div class="brand-badge-row">
+      <span class="badge badge-orange">Market Research</span>
+      <span class="badge badge-gold">Data Verified May 2026</span>
+      <span class="badge badge-green">Primary Sources Only</span>
+      <span class="badge badge-orange">Strategy Ready</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">₹637Cr</div>
+        <div class="stat-label">House of Rare FY24 Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$30M</div>
+        <div class="stat-label">Total Funding Raised</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">85%</div>
+        <div class="stat-label">Offline Market Share (Luggage)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Active Trolley SKUs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">₹300Cr+</div>
+        <div class="stat-label">Escape Plan ARR (Jan 2026)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6.72%</div>
+        <div class="stat-label">India Luggage Market CAGR</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="fancy">
+
+  <div class="section">
+    <div class="section-label">Context</div>
+    <h2>What Is This All About?</h2>
+    <div class="grid-2" style="margin-top:28px;">
+      <div class="card">
+        <h3 style="margin-bottom:10px;">The Brand</h3>
+        <p style="font-size:14px;">Rare Rabbit is a premium Indian menswear brand under The House of Rare. Its trolley line is manufactured and distributed by <strong style="color:var(--orange);">Escape Plan</strong> (Enchante Brands Pvt. Ltd., HSR Layout, Bengaluru) — a travel accessories platform co-founded by Abhinav Pathak and Abhinav Zutshi, launched May 2025.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">The Platform</h3>
+        <p style="font-size:14px;">Escape Plan raised <strong style="color:var(--orange);">USD 5M seed</strong> in July 2025 and <strong style="color:var(--orange);">USD 25M Series A</strong> in January 2026 (Jungle Ventures, Fireside Ventures, IndiGo Ventures). Currently reports ₹300Cr+ ARR. Two trolley lines — <em>Gallardo</em> and <em>Tony</em> — sold exclusively online.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">The Market</h3>
+        <p style="font-size:14px;">India's luggage market was valued at <strong style="color:var(--orange);">USD 4.0–4.26 billion</strong> in 2025, growing at 6.72% CAGR through 2034 (IMARC Group). Offline retail accounts for approximately 85% of total luggage sales by value — a channel Rare Rabbit does not yet operate in.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">Why This Research</h3>
+        <p style="font-size:14px;">To identify the <strong style="color:var(--orange);">minimum product, distribution, and service thresholds</strong> required to reduce customer hesitation and churn — translating competitive findings into prioritised strategies that improve CLV and reduce pre-purchase drop-off.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Escape Plan Products</div>
+    <h2>The Two SKUs</h2>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card" style="border-top:3px solid var(--orange);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+          <div>
+            <div class="section-label" style="margin:0 0 4px;">SKU 01</div>
+            <h3>Gallardo</h3>
+          </div>
+          <span class="badge badge-orange">Medium · 3.5 kg</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">ASIN B0GVDHR1SP · Amazon.in verified</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="badge badge-green">TSA Lock</span>
+          <span class="badge badge-green">Polycarbonate</span>
+          <span class="badge badge-green">Toiletry Module</span>
+          <span class="badge badge-gold">10-yr Warranty (EP/Amazon)</span>
+          <span class="badge badge-red">5-yr on thehouseofrare.com</span>
+        </div>
+        <div style="margin-top:16px;font-size:13px;color:var(--text);">
+          <strong style="color:var(--white);">Sale price:</strong> ₹5,999 (cabin) · ₹7,999–₹9,999 (check-in)<br>
+          <strong style="color:var(--white);">Set:</strong> ₹18,999 MRP
+        </div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--gold);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+          <div>
+            <div class="section-label" style="margin:0 0 4px;color:var(--gold);">SKU 02</div>
+            <h3>Tony</h3>
+          </div>
+          <span class="badge badge-gold">Check-in</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">ASIN B0GY91Q52P · Amazon.in verified</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="badge badge-green">TSA Lock</span>
+          <span class="badge badge-green">Polycarbonate</span>
+          <span class="badge badge-gold">Carbon Fibre Finish</span>
+          <span class="badge badge-gold">14-day Try &amp; Buy</span>
+        </div>
+        <div style="margin-top:16px;font-size:13px;color:var(--text);">
+          Available exclusively on <strong style="color:var(--white);">myescplan.com</strong>, Amazon.in, and Flipkart.<br>
+          No physical retail as of May 2026.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Customer Voice</div>
+    <h2>What Buyers Say</h2>
+    <div class="grid-2" style="margin-top:24px;">
+      <div>
+        <p style="color:var(--green);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;margin-bottom:12px;">✓ WHAT THEY LOVE</p>
+        <div class="quote-block">"Carbon fibre finish looks super premium and stands out from regular luggage."<div class="quote-source">Amazon.in verified purchase</div></div>
+        <div class="quote-block">"Wheels roll smoothly. TSA lock was specifically what I was looking for."<div class="quote-source">Amazon.in verified purchase</div></div>
+        <div class="quote-block">"Removable toiletry kit is super convenient — different from the usual suitcases."<div class="quote-source">Amazon.in verified purchase</div></div>
+      </div>
+      <div>
+        <p style="color:var(--red);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;margin-bottom:12px;">⚠ WHAT NEEDS WORK</p>
+        <div class="quote-block" style="border-color:var(--red);">"Logistics is slow and the support team needs improvement."<div class="quote-source">App Store review</div></div>
+        <div class="quote-block" style="border-color:var(--red);">"Exchange was not possible because the product was out of stock."<div class="quote-source">App Store review</div></div>
+        <div class="quote-block" style="border-color:var(--red);">"Haven't had a chance to use it for a long trip yet." — noted in almost every positive review.<div class="quote-source">Pattern across Amazon.in reviews</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 2: DASHBOARD (Charts) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="page" id="page-dashboard">
+<div class="container">
+  <div class="page-hero">
+    <div class="page-hero-bg">DATA</div>
+    <div class="section-label">Data Dashboard</div>
+    <h2>Market Metrics &amp; Visual Analysis</h2>
+    <p style="color:var(--muted);margin-top:10px;font-size:15px;">All data sourced exclusively from official brand pages and verified press releases.</p>
+  </div>
+
+  <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">10yr</div><div class="stat-label">Warranty inconsistency<br>(10yr vs 5yr by channel)</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">2</div><div class="stat-label">RR SKUs vs 30–50+<br>for rivals</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">₹18,999</div><div class="stat-label">RR 3-pc set vs Safari<br>₹8,999</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">0</div><div class="stat-label">Repair centres vs<br>VIP's 300+</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">3.5kg</div><div class="stat-label">Gallardo medium weight<br>cabin not published</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">85%</div><div class="stat-label">Offline market gap<br>RR is 0% offline</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">₹300Cr</div><div class="stat-label">Escape Plan ARR<br>(Jan 2026)</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:30px;">6.72%</div><div class="stat-label">India luggage<br>CAGR 2025–2034</div></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:40px;">
+    <div class="chart-box">
+      <div class="chart-title">3-Piece Set Price Comparison (₹)</div>
+      <canvas id="priceChart" height="240"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Warranty Years by Brand</div>
+      <canvas id="warrantyChart" height="240"></canvas>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:24px;">
+    <div class="chart-box">
+      <div class="chart-title">SKU Count — Brand Comparison</div>
+      <canvas id="skuChart" height="240"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Distribution Channel Presence</div>
+      <canvas id="distChart" height="240"></canvas>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;" class="chart-box">
+    <div class="chart-title">Competitive Radar — Feature &amp; Infrastructure Score</div>
+    <div style="max-width:520px;margin:0 auto;">
+      <canvas id="radarChart" height="340"></canvas>
+    </div>
+    <div class="radar-legend">
+      <div class="radar-legend-item"><div class="radar-dot" style="background:rgba(232,115,42,0.8)"></div>Rare Rabbit</div>
+      <div class="radar-legend-item"><div class="radar-dot" style="background:rgba(82,199,138,0.8)"></div>Mokobara</div>
+      <div class="radar-legend-item"><div class="radar-dot" style="background:rgba(201,168,76,0.8)"></div>VIP/Safari</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:24px;">
+    <div class="chart-box">
+      <div class="chart-title">Cabin Entry Pricing Comparison (₹)</div>
+      <canvas id="cabinPriceChart" height="240"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Sales Channel Mix (Offline vs Online)</div>
+      <canvas id="channelMixChart" height="240"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 3: STRENGTHS & WEAKNESSES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="page" id="page-swot">
+<div class="container">
+  <div class="page-hero">
+    <div class="page-hero-bg">SWOT</div>
+    <div class="section-label">Brand Analysis</div>
+    <h2>Rare Rabbit — Strengths &amp; Areas for Development</h2>
+  </div>
+
+  <div class="grid-2">
+    <!-- STRENGTHS -->
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+        <span style="font-size:20px;">✅</span>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);">Strengths</div>
+      </div>
+      <div class="card" style="padding:0 24px;">
+        <div class="sw-item">
+          <div class="sw-icon str">👑</div>
+          <div>
+            <div class="sw-title">Fashion Brand Credibility</div>
+            <div class="sw-desc">The House of Rare reported ₹637 crore in revenue for FY24. Rare Rabbit's trust with urban professionals aged 25–40 extends naturally into luggage — an advantage no pure-play luggage brand can easily replicate.</div>
+          </div>
+        </div>
+
+        <div class="sw-item">
+          <div class="sw-icon str">🛡️</div>
+          <div>
+            <div class="sw-title">10-Year Warranty (Escape Plan / Amazon.in)</div>
+            <div class="sw-desc">Exceeds Mokobara's 6-year (Iconic), Safari's 5-year, and American Tourister India's 3-year. A strong credential — subject to the channel inconsistency noted in weaknesses.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon str">🔒</div>
+          <div>
+            <div class="sw-title">TSA Lock + PC Shell Across All SKUs</div>
+            <div class="sw-desc">Removable toiletry module — noted positively in verified purchase reviews — is not a standard offering in competing brands at this price range.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon str">✈️</div>
+          <div>
+            <div class="sw-title">IndiGo Ventures Strategic Investor</div>
+            <div class="sw-desc">Confirmed in GoIndigo.in press release dated 22 January 2026. Opens airport retail and in-flight catalogue pathways that no other new-entrant luggage brand in India currently has.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEAKNESSES -->
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+        <span style="font-size:20px;">⚠️</span>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--red);">Areas for Development</div>
+      </div>
+      <div class="card" style="padding:0 24px;">
+        <div class="sw-item">
+          <div class="sw-icon wk">📉</div>
+          <div>
+            <div class="sw-title">Limited SKU Range (2 Lines)</div>
+            <div class="sw-desc">Mokobara offers 30+ SKUs; American Tourister 50+ models. A buyer seeking a soft-sided bag, laptop trolley, or sub-₹4,000 entry option finds nothing in Rare Rabbit's range today.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon wk">🏬</div>
+          <div>
+            <div class="sw-title">Online-Only Distribution</div>
+            <div class="sw-desc">85% of India's luggage sales value flows through offline channels. VIP Industries has 8,000+ retail outlets; Safari covers pan-India including tier II/III. Rare Rabbit is absent from all physical retail as of May 2026.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon wk">🔧</div>
+          <div>
+            <div class="sw-title">No Repair / Service Infrastructure</div>
+            <div class="sw-desc">Warranty support via email and phone only. Zero authorised repair centres. VIP operates 300+; American Tourister uses Samsonite India's authorised service network.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon wk">⚖️</div>
+          <div>
+            <div class="sw-title">Cabin Weight Not Published</div>
+            <div class="sw-desc">Gallardo medium is 3.5 kg. Cabin weight unpublished on any channel. Mokobara lists 3.12–3.27 kg explicitly. With IndiGo's 7 kg domestic cabin limit, buyers need this at point of purchase.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon wk">📋</div>
+          <div>
+            <div class="sw-title">Hardware Specs Unnamed</div>
+            <div class="sw-desc">No product page names shell grade, wheel manufacturer, or zipper brand. Mokobara markets German Makrolon, Japanese Hinomoto spinners, and YKK zippers. Side-by-side comparisons favour Mokobara.</div>
+          </div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-icon wk">🔀</div>
+          <div>
+            <div class="sw-title">Warranty Channel Inconsistency</div>
+            <div class="sw-desc">Products carry 10-year warranty on myescplan.com and Amazon.in, but only 5-year on thehouseofrare.com. Thorough buyers lose confidence in the headline claim.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="fancy">
+
+  <div class="section">
+    <div class="section-label">Buyer Psychology</div>
+    <h2>Why They Choose vs. Why They Hesitate</h2>
+    <div class="grid-2" style="margin-top:28px;">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);margin-bottom:16px;">REASONS TO BUY</div>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><td class="good">✓</td><td>Established fashion brand trust carries through to luggage</td></tr>
+              <tr><td class="good">✓</td><td>Design is genuinely distinctive at this price band</td></tr>
+              <tr><td class="good">✓</td><td>14-day try-and-buy reduces risk on ₹6,000–₹10,000 purchase</td></tr>
+              <tr><td class="good">✓</td><td>10-year warranty headline is compelling at the research stage</td></tr>
+              <tr><td class="good">✓</td><td>Removable toiletry module adds practical everyday value</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--red);margin-bottom:16px;">REASONS TO HESITATE</div>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><td class="bad">✗</td><td>No long-trip usage evidence — every review reflects first-time use</td></tr>
+              <tr><td class="bad">✗</td><td>Not available in physical retail — limits pre-purchase evaluation</td></tr>
+              <tr><td class="bad">✗</td><td>Only two trolley options — no soft bags or laptop trolleys</td></tr>
+              <tr><td class="bad">✗</td><td>Warranty term varies by channel — reduces confident buyers</td></tr>
+              <tr><td class="bad">✗</td><td>After-sales support is currently email-only for premium pricing</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 4: COMPETITORS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="page" id="page-competitors">
+<div class="container">
+  <div class="page-hero">
+    <div class="page-hero-bg">VS</div>
+    <div class="section-label">Competitive Analysis</div>
+    <h2>Competitive Landscape &amp; Advantage Mapping</h2>
+  </div>
+
+  <div class="section-sm">
+    <div class="section-label">Feature Comparison</div>
+    <h3 style="margin-bottom:20px;">Brand-by-Brand Breakdown</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Key Standout</th>
+            <th>Hardware</th>
+            <th>Warranty</th>
+            <th>SKUs</th>
+            <th>Offline Reach</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="highlight">Rare Rabbit</td>
+            <td>Fashion brand trust; 14-day trial; IndiGo investor</td>
+            <td>PC shell; TSA lock; toiletry module</td>
+            <td class="good">10-yr (EP/Amazon) · 5-yr (brand site)</td>
+            <td class="bad">2</td>
+            <td class="bad">None (planned)</td>
+          </tr>
+          <tr>
+            <td style="color:var(--gold);font-weight:600;">Mokobara</td>
+            <td>Front-open laptop compartment; 30-day trial; IndiGo collab</td>
+            <td class="good">German Makrolon; Hinomoto wheels; YKK zippers</td>
+            <td class="warn">6-yr Iconic / 3-yr Transit</td>
+            <td class="good">30+ SKUs</td>
+            <td class="warn">Limited pop-ups</td>
+          </tr>
+          <tr>
+            <td>VIP Industries</td>
+            <td>8,000+ outlets; 300+ service centres; 8-level quality testing</td>
+            <td>Proprietary (unnamed)</td>
+            <td class="warn">Per product tag</td>
+            <td class="good">Dozens (Skybags, Aristocrat, Carlton)</td>
+            <td class="good">8,000+ outlets nationwide</td>
+          </tr>
+          <tr>
+            <td>American Tourister</td>
+            <td>Samsonite-backed; 120+ countries; authorised repair centres</td>
+            <td>PC and PP; TSA locks on most lines</td>
+            <td class="warn">3-yr international</td>
+            <td class="good">50+</td>
+            <td class="good">Pan-India authorised centres</td>
+          </tr>
+          <tr>
+            <td>Safari Industries</td>
+            <td>Tier II/III reach; USB charging; in-house manufacturing (Halol)</td>
+            <td>PC and PP options</td>
+            <td class="warn">5 years</td>
+            <td class="good">67+ models</td>
+            <td class="good">Pan-India including tier II/III</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-sm">
+    <div class="section-label">Pricing Strategy</div>
+    <h3 style="margin-bottom:20px;">Price Band Positioning</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Cabin Entry / MRP</th>
+            <th>Check-in</th>
+            <th>3-Piece Set</th>
+            <th>Approach</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="highlight">Rare Rabbit</td>
+            <td>₹5,999 sale / ₹7,999 MRP</td>
+            <td>₹7,999–₹9,999</td>
+            <td class="warn">₹18,999</td>
+            <td>MRP with channel discount; 14-day try-and-buy</td>
+          </tr>
+          <tr>
+            <td style="color:var(--gold);">Mokobara</td>
+            <td>~₹5,000 (Transit) / ₹9,495 (Iconic)</td>
+            <td>₹6,999–₹11,999</td>
+            <td class="bad">₹38,999 (Transit 3-pc)</td>
+            <td>Near-permanent promotional pricing; 30-day trial</td>
+          </tr>
+          <tr>
+            <td>VIP / Skybags</td>
+            <td>₹3,000–₹5,000</td>
+            <td>₹4,000–₹7,000</td>
+            <td class="good">₹6,999+</td>
+            <td>Volume pricing; retail channel depth</td>
+          </tr>
+          <tr>
+            <td>American Tourister</td>
+            <td>₹2,999–₹5,000</td>
+            <td>₹5,000–₹8,000</td>
+            <td class="good">₹9,999 (Aerostep)</td>
+            <td>Global brand trust; awarded product design</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>₹1,699–₹4,000</td>
+            <td>₹3,000–₹6,000</td>
+            <td class="good">₹8,999 (Thorium Royale)</td>
+            <td>Accessible entry pricing; widest offline reach</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:16px;padding:16px 20px;background:var(--surface2);border-radius:6px;border-left:3px solid var(--red);">
+      <strong style="color:var(--red);">Key Observation:</strong> <span style="font-size:14px;color:var(--text);">Safari's Thorium Royale 3-piece set (polycarbonate, 8-wheel, TSA) is available at approximately ₹8,999 — less than half of Rare Rabbit's 3-piece at ₹18,999. To maintain premium positioning credibly, Rare Rabbit must strengthen its functional story alongside its design narrative.</span>
+    </div>
+  </div>
+
+  <div class="section-sm">
+    <div class="section-label">Distribution Map</div>
+    <h3 style="margin-bottom:20px;">Channel Presence Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Channel</th><th>Rare Rabbit</th><th>Mokobara</th><th>VIP / Safari</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Online DTC</td><td class="good">✓ myescplan.com</td><td class="good">✓ mokobara.com</td><td class="good">✓ Yes</td></tr>
+          <tr><td>Amazon / Flipkart</td><td class="good">✓ Yes</td><td class="good">✓ Yes</td><td class="good">✓ Yes</td></tr>
+          <tr><td>Physical Stores</td><td class="bad">None (expansion planned)</td><td class="warn">Limited pop-ups</td><td class="good">8,000+ (VIP); Pan-India (Safari)</td></tr>
+          <tr><td>Airport Retail</td><td class="warn">None (IndiGo pathway open)</td><td class="bad">None</td><td class="good">Available</td></tr>
+          <tr><td>Service Centres</td><td class="bad">None — email / phone only</td><td class="bad">None — email only</td><td class="good">300+ (VIP); Safari call centre</td></tr>
+          <tr><td>Tier II Availability</td><td class="bad">Not available</td><td class="bad">Online only</td><td class="good">Fully available</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px;">Escape Plan is positioning itself as a multi-brand travel platform. HRX-branded trolleys are already sold alongside Rare Rabbit. As the platform expands its brand portfolio, Rare Rabbit will need to stand on product merit to maintain shelf prominence.</p>
+  </div>
+
+  <div class="section-sm">
+    <div class="section-label">Competitive Advantage</div>
+    <h3 style="margin-bottom:20px;">What Rare Rabbit Has That No One Else Does</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">✈️</div>
+        <h3>IndiGo Ventures</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Strategic investor relationship with India's largest domestic airline. No other new-entrant luggage brand has this airport retail pathway confirmed.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">👔</div>
+        <h3>Fashion Brand Halo</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">₹637Cr apparel business creates instant credibility with the 25–40 urban professional male — exactly the luggage buyer Escape Plan is targeting.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">🏪</div>
+        <h3>200+ Apparel Stores</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Existing Rare Rabbit retail network provides a warm, high-intent audience for trolley cross-sell at low incremental acquisition cost.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">🔄</div>
+        <h3>14-Day Trial</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Unique in the competitive set. Converts online purchase hesitation into a low-risk test — critical when buyers cannot inspect the product physically.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">💼</div>
+        <h3>Toiletry Module</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Removable toiletry kit is not a standard offering in competing brands at this price range and drives strong positive word-of-mouth in verified reviews.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:28px;margin-bottom:12px;">📈</div>
+        <h3>$30M Funding</h3>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Capital from Jungle Ventures and Fireside Ventures funds the planned 200+ Escape Plan store expansion — infrastructure that would give Rare Rabbit offline presence at scale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PAGE 5: ROADMAP -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="page" id="page-roadmap">
+<div class="container">
+  <div class="page-hero">
+    <div class="page-hero-bg">2027</div>
+    <div class="section-label">Growth Strategy</div>
+    <h2>Roadmap to Market Leadership 2026–2027</h2>
+  </div>
+
+  <div class="section-sm">
+    <div class="section-label">Priority Recommendations</div>
+    <h3 style="margin-bottom:20px;">9 Prioritised Actions</h3>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <div class="rec-card">
+        <div class="rec-priority pri-critical">🔴 Critical</div>
+        <div class="rec-title">Publish Shell Grade, Wheel Manufacturer &amp; Zipper Brand on All Product Pages</div>
+        <div class="rec-rationale">Buyers comparing specs will find Mokobara's Makrolon, Hinomoto, and YKK claims more reassuring than unnamed equivalents. Publishing equivalent detail levels the comparison in side-by-side research.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-priority pri-critical">🔴 Critical</div>
+        <div class="rec-title">Publish Cabin Weight on All Product Listings</div>
+        <div class="rec-rationale">With IndiGo's 7 kg domestic cabin limit, buyers need this before purchase. Mokobara lists 3.12–3.27 kg on product pages. Rare Rabbit currently lists no figure for any SKU.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-priority pri-critical">🔴 Critical</div>
+        <div class="rec-title">Expand Trolley Range — Minimum 6 SKUs</div>
+        <div class="rec-rationale">Include a sub-₹5,000 cabin, a laptop trolley, and a large standalone check-in. Two lines limit addressable demand significantly. Every format gap redirects a potential buyer to a competitor.</div>
+      </div>
+      <div class="rec-card" style="border-left-color:var(--orange);">
+        <div class="rec-priority pri-high">🟠 High</div>
+        <div class="rec-title">Establish Authorised Service Touchpoints in Key Metro Cities</div>
+        <div class="rec-rationale">Partnering with existing luggage repair centres is a practical near-term step toward the service credibility that VIP (300+ centres) and American Tourister hold. Email-only support is insufficient for a premium-priced product.</div>
+      </div>
+      <div class="rec-card" style="border-left-color:var(--orange);">
+        <div class="rec-priority pri-high">🟠 High</div>
+        <div class="rec-title">Engineer and Communicate a Verified Sub-2.8 kg Cabin Bag</div>
+        <div class="rec-rationale">A documented lightweight claim would directly appeal to domestic air travellers and differentiate Rare Rabbit from Mokobara's 3.23–3.27 kg range — a meaningful technical gap to exploit.</div>
+      </div>
+      <div class="rec-card" style="border-left-color:var(--orange);">
+        <div class="rec-priority pri-high">🟠 High</div>
+        <div class="rec-title">Publish Durability Content — Drop Tests, Wheel Stress Tests, Multi-Trip Reviews</div>
+        <div class="rec-rationale">Buyers consistently note the absence of long-trip evidence. Third-party tested content addresses this gap more credibly than brand copy alone. Every current positive review references first-time use only.</div>
+      </div>
+      <div class="rec-card" style="border-left-color:var(--gold);">
+        <div class="rec-priority pri-medium">🟡 Medium</div>
+        <div class="rec-title">Activate the IndiGo Ventures Relationship for Airport Retail Access</div>
+        <div class="rec-rationale">This distribution pathway is unique to Rare Rabbit among new-entrant luggage brands and is time-sensitive. No other new entrant has this confirmed investor relationship with a major domestic airline.</div>
+      </div>
+      <div class="rec-card" style="border-left-color:var(--gold);">
+        <div class="rec-priority pri-medium">🟡 Medium</div>
+        <div class="rec-title">Introduce Trolley Display &amp; Cross-Sell at Rare Rabbit Apparel Stores</div>
+        <div class="rec-rationale">The existing network of 200+ apparel stores provides a warm, high-intent audience at low incremental acquisition cost. This also addresses the 85% offline sales gap without requiring a full retail build-out.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="fancy">
+
+  <div class="section">
+    <div class="section-label">Phase-by-Phase Roadmap</div>
+    <h3 style="margin-bottom:32px;">2026–2027 Strategic Growth Plan</h3>
+
+    <div class="roadmap-wrap">
+      <div class="phase-block">
+        <div>
+          <div class="phase-num">01</div>
+          <div class="phase-label">Phase One</div>
+        </div>
+        <div>
+          <div class="phase-label">Q2–Q3 2026</div>
+          <div class="phase-timeline">Operational Foundations</div>
+          <ul class="phase-actions">
+            <li>Standardise warranty across all channels</li>
+            <li>Publish hardware specifications (shell, wheels, zippers)</li>
+            <li>Publish cabin weight on all product listings</li>
+            <li>Secure service tie-ups in 10–15 metro cities</li>
+          </ul>
+          <div class="phase-metric">✓ Target: Zero warranty discrepancy · Spec transparency on par with Mokobara</div>
+        </div>
+      </div>
+
+      <div class="phase-block">
+        <div>
+          <div class="phase-num">02</div>
+          <div class="phase-label">Phase Two</div>
+        </div>
+        <div>
+          <div class="phase-label">Q3–Q4 2026</div>
+          <div class="phase-timeline">Range Diversification</div>
+          <ul class="phase-actions">
+            <li>Launch sub-₹5,000 cabin SKU</li>
+            <li>Launch laptop trolley format</li>
+            <li>Launch large standalone check-in</li>
+            <li>Engineer and certify sub-2.8 kg cabin SKU</li>
+          </ul>
+          <div class="phase-metric">✓ Target: Minimum 6 trolley SKUs live · Verified weight claim published</div>
+        </div>
+      </div>
+
+      <div class="phase-block">
+        <div>
+          <div class="phase-num">03</div>
+          <div class="phase-label">Phase Three</div>
+        </div>
+        <div>
+          <div class="phase-label">Q4 2026–Q1 2027</div>
+          <div class="phase-timeline">Physical Retail Blitz</div>
+          <ul class="phase-actions">
+            <li>Open 200+ Escape Plan stores nationwide</li>
+            <li>Activate IndiGo airport retail distribution</li>
+            <li>In-store display at Rare Rabbit apparel stores</li>
+            <li>Publish long-trip durability studies and drop tests</li>
+          </ul>
+          <div class="phase-metric">✓ Target: Physical presence confirmed · Airport retail live</div>
+        </div>
+      </div>
+
+      <div class="phase-block">
+        <div>
+          <div class="phase-num">04</div>
+          <div class="phase-label">Phase Four</div>
+        </div>
+        <div>
+          <div class="phase-label">2027+</div>
+          <div class="phase-timeline">Category Leadership</div>
+          <ul class="phase-actions">
+            <li>Loyalty and repair programme launch</li>
+            <li>Multi-trip durability data publication</li>
+            <li>International market pilots</li>
+            <li>Smart luggage feature exploration</li>
+          </ul>
+          <div class="phase-metric">✓ Target: Repeat purchase rate · NPS relative to Mokobara</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="fancy">
+
+  <div class="section-sm">
+    <div class="section-label">Marketing Strategy</div>
+    <h3 style="margin-bottom:20px;">Creating Demand &amp; Improving Positioning</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">CONTENT STRATEGY</div>
+        <h3 style="margin-bottom:8px;">Build Long-Trip Evidence</h3>
+        <p style="font-size:13px;color:var(--muted);">Commission 3–5 content creators to document multi-city trips with Gallardo / Tony. Buyers see first-use reviews only — long-trip durability content directly addresses the #1 hesitation point.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">SPEC MARKETING</div>
+        <h3 style="margin-bottom:8px;">Name Your Hardware</h3>
+        <p style="font-size:13px;color:var(--muted);">Mokobara wins spec comparisons by naming Makrolon, Hinomoto, and YKK. Publishing equivalent (or superior) specs levels the playing field in the research phase where buyers compare multiple tabs.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">CHANNEL ACTIVATION</div>
+        <h3 style="margin-bottom:8px;">IndiGo Airport Retail</h3>
+        <p style="font-size:13px;color:var(--muted);">Leverage IndiGo Ventures' strategic relationship to place Gallardo at departure gate retail. Captures high-intent buyers at the exact moment of travel — no other new-entrant has this access.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">CROSS-SELL</div>
+        <h3 style="margin-bottom:8px;">Apparel Store Integration</h3>
+        <p style="font-size:13px;color:var(--muted);">Display trolleys in 200+ Rare Rabbit apparel stores. Customers buying a ₹5,000 shirt are already pre-qualified for a ₹8,000 trolley. No new customer acquisition cost.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">TRUST BUILDING</div>
+        <h3 style="margin-bottom:8px;">3rd-Party Durability Testing</h3>
+        <p style="font-size:13px;color:var(--muted);">Video drop tests, wheel stress tests, and multi-trip user studies published openly. Builds the "track record" in luggage that Mokobara currently has and Rare Rabbit lacks.</p>
+      </div>
+      <div class="card">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">PRODUCT DIFFERENTIATION</div>
+        <h3 style="margin-bottom:8px;">Sub-2.8kg Campaign</h3>
+        <p style="font-size:13px;color:var(--muted);">Engineer, certify, and market a verified sub-2.8 kg cabin bag. With IndiGo's 7 kg cabin limit, a 2.7 kg trolley gives 4.3 kg of actual packing weight — a concrete, measurable benefit Mokobara cannot match.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:8px;border-top:3px solid var(--orange);">
+    <div class="section-label">Author</div>
+    <div style="display:flex;align-items:center;gap:20px;margin-top:12px;">
+      <div style="width:56px;height:56px;border-radius:50%;background:var(--orange-dim);border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--orange);flex-shrink:0;">RMS</div>
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);">R Maria Sheldon</div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px;">Primary Author &amp; Researcher — Market Research Portfolio, May 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">ESC PLAN<span style="color:var(--orange);">▐</span></div>
+  <div class="footer-info">Rare Rabbit Trolley — Competitive Market Assignment &nbsp;·&nbsp; R Maria Sheldon</div>
+  <div class="footer-info" style="color:var(--orange);">28 verified sources</div>
+</footer>
+
+
+<script>
+// ─── PAGE NAVIGATION ───
+function switchPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const labels = ['overview','dashboard','swot','competitors','roadmap'];
+  const idx = labels.indexOf(name);
+  if (tabs[idx]) tabs[idx].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'dashboard') initCharts();
+}
+
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ─── CHARTS ───
+let chartsInit = false;
+
+function initCharts() {
+  if (chartsInit) return;
+  chartsInit = true;
+
+  const orange = '#E8732A';
+  const gold = '#C9A84C';
+  const green = '#52C78A';
+  const red = '#E05252';
+  const muted = '#888';
+  const surface = '#181818';
+  const text = '#DEDAD4';
+
+  Chart.defaults.color = muted;
+  Chart.defaults.borderColor = '#232323';
+  Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+  // 1. 3-piece set price
+  new Chart(document.getElementById('priceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Rare Rabbit', 'Mokobara', 'VIP/Skybags', 'American Tourister', 'Safari'],
+      datasets: [{
+        label: '3-Piece Set MRP (₹)',
+        data: [18999, 38999, 6999, 9999, 8999],
+        backgroundColor: [orange, gold, green, green, green],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '₹' + ctx.raw.toLocaleString('en-IN') } } },
+      scales: {
+        x: { grid: { color: '#1e1e1e' } },
+        y: { grid: { color: '#1e1e1e' }, ticks: { callback: v => '₹' + (v/1000)+'k' } }
+      }
+    }
+  });
+
+  // 2. Warranty
+  new Chart(document.getElementById('warrantyChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Rare Rabbit\n(EP/Amazon)', 'Rare Rabbit\n(brand site)', 'Mokobara\nIconic', 'Safari', 'American\nTourister', 'Mokobara\nTransit'],
+      datasets: [{
+        label: 'Warranty (years)',
+        data: [10, 5, 6, 5, 3, 3],
+        backgroundColor: [orange, red, gold, gold, green, green],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#1e1e1e' } },
+        y: { grid: { color: '#1e1e1e' }, ticks: { stepSize: 1 } }
+      }
+    }
+  });
+
+  // 3. SKU count
+  new Chart(document.getElementById('skuChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Rare Rabbit', 'Mokobara', 'American Tourister', 'Safari', 'VIP (multi-brand)'],
+      datasets: [{
+        label: 'SKU Count',
+        data: [2, 30, 50, 67, 100],
+        backgroundColor: [red, gold, green, green, green],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#1e1e1e' } },
+        y: { grid: { color: '#1e1e1e' } }
+      }
+    }
+  });
+
+  // 4. Distribution donut
+  new Chart(document.getElementById('distChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['VIP Retail Outlets', 'Safari Pan-India', 'American Tourister', 'Mokobara Pop-ups', 'Rare Rabbit (Online only)'],
+      datasets: [{
+        data: [8000, 3000, 2000, 50, 0],
+        backgroundColor: [green, gold, '#52a0c7', '#A8C78A', red],
+        borderWidth: 0,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: muted, font: { size: 11 }, boxWidth: 12, padding: 12 } },
+        tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + ' points' } }
+      },
+      cutout: '65%',
+    }
+  });
+
+  // 5. Radar
+  new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Brand Trust', 'SKU Range', 'Offline Reach', 'Service Infra', 'Spec Transparency', 'Price Competitiveness', 'Warranty Strength'],
+      datasets: [
+        {
+          label: 'Rare Rabbit',
+          data: [8, 1, 0, 1, 2, 5, 8],
+          backgroundColor: 'rgba(232,115,42,0.15)',
+          borderColor: orange,
+          borderWidth: 2,
+          pointBackgroundColor: orange,
+        },
+        {
+          label: 'Mokobara',
+          data: [6, 7, 2, 2, 9, 6, 7],
+          backgroundColor: 'rgba(82,199,138,0.1)',
+          borderColor: green,
+          borderWidth: 2,
+          pointBackgroundColor: green,
+        },
+        {
+          label: 'VIP / Safari',
+          data: [7, 9, 10, 10, 5, 9, 6],
+          backgroundColor: 'rgba(201,168,76,0.1)',
+          borderColor: gold,
+          borderWidth: 2,
+          pointBackgroundColor: gold,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          grid: { color: '#232323' },
+          angleLines: { color: '#232323' },
+          ticks: { display: false },
+          pointLabels: { color: text, font: { size: 11 } },
+          min: 0, max: 10
+        }
+      }
+    }
+  });
+
+  // 6. Cabin price bar
+  new Chart(document.getElementById('cabinPriceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Safari\n₹1,699', 'American Tourister\n₹2,999', 'VIP/Skybags\n₹3,000', 'Mokobara Transit\n~₹5,000', 'Rare Rabbit\n₹5,999'],
+      datasets: [{
+        label: 'Cabin Entry Price (₹)',
+        data: [1699, 2999, 3000, 5000, 5999],
+        backgroundColor: [green, green, green, gold, orange],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '₹' + ctx.raw.toLocaleString('en-IN') } } },
+      scales: {
+        x: { grid: { color: '#1e1e1e' } },
+        y: { grid: { color: '#1e1e1e' }, ticks: { callback: v => '₹' + (v/1000).toFixed(1)+'k' } }
+      }
+    }
+  });
+
+  // 7. Channel Mix
+  new Chart(document.getElementById('channelMixChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Industry Average', 'Escape Plan'],
+      datasets: [
+        {
+          label: 'Offline Retail (%)',
+          data: [85, 0],
+          backgroundColor: green,
+          borderRadius: 4,
+        },
+        {
+          label: 'Online DTC / Amazon (%)',
+          data: [15, 100],
+          backgroundColor: orange,
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { 
+        legend: { position: 'bottom', labels: { color: muted, font: { size: 11 }, boxWidth: 12, padding: 12 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + '%' } }
+      },
+      scales: {
+        x: { stacked: true, grid: { color: '#1e1e1e' } },
+        y: { stacked: true, grid: { color: '#1e1e1e' }, max: 100, ticks: { callback: v => v + '%' } }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
